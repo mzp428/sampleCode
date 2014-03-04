@@ -227,32 +227,3 @@ function mzp_tm_footer_scripts() {
 	}
 }
 
-/* Support for Smilies */
-add_filter( 'widget_text', 'mzp_tm_apply_smilies_to_widget_text' );
-function mzp_tm_apply_smilies_to_widget_text( $text ) {
-	if ( get_option( 'use_smilies' ) ) {
-		$text = convert_smilies( $text );
-	}
-	return $text;
-}
-
-/* Hack needed to enable full media options when adding content form media library */
-/* (this is done excluding post_id parameter in Thickbox iframe url) */
-add_filter( '_upload_iframe_src', 'mzp_tm_upload_iframe_src' );
-function mzp_tm_upload_iframe_src ( $upload_iframe_src ) {
-	global $pagenow;
-	if ( $pagenow == "widgets.php" || ( $pagenow == "admin-ajax.php" && isset ( $_POST['id_base'] ) && $_POST['id_base'] == "mzp-tm" ) ) {
-		$upload_iframe_src = str_replace( 'post_id=0', '', $upload_iframe_src );
-	}
-	return $upload_iframe_src;
-}
-
-/* Hack for widgets accessibility mode */
-add_filter( 'wp_default_editor', 'mzp_tm_editor_accessibility_mode' );
-function mzp_tm_editor_accessibility_mode($editor) {
-	global $pagenow;
-	if ( $pagenow == "widgets.php" && isset( $_GET['editwidget'] ) && strpos( $_GET['editwidget'], 'mzp-tm' ) === 0 ) {
-		$editor = 'html';
-	}
-	return $editor;
-}
