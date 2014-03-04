@@ -1,12 +1,15 @@
 <?php
+/*
+Plugin Name: MZP TM WIDGET
+*/
 
 /* Widget class */
 class WP_Widget_mzp_tm extends WP_Widget {
 
 	function __construct() {
-		$widget_ops = array( 'classname' => 'widget_mzp_tm', 'description' => __( 'Arbitrary text or HTML with visual editor', 'mzp-tm-widget' ) );
+		$widget_ops = array( 'classname' => 'widget_mzp_tm', 'description' => __( 'HTML w/visual editor', 'mzp-tm-widget' ) );
 		$control_ops = array( 'width' => 800, 'height' => 800 );
-		parent::__construct( 'mzp-tm', __( 'MZP tm', 'mzp-tm-widget' ), $widget_ops, $control_ops );
+		parent::__construct( 'mzp-tm', __( 'Visual Editor', 'mzp-tm-widget' ), $widget_ops, $control_ops );
 	}
 
 	function widget( $args, $instance ) {
